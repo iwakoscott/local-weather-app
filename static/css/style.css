@@ -1,0 +1,41 @@
+* {
+  font-family: 'Archivo', sans-serif;
+}
+
+.fa-cloud {
+  color: white;
+}
+
+.weather-icon {
+  font-size: 10em;
+  text-align: center;
+}
+
+.weather-icon:hover{
+  font-size: 10em;
+  text-align: center;
+  color: grey;
+}
+
+.location-name, .temperature, .conditions {
+  text-align: center;
+}
+
+.weather-box{
+  border-style: solid;
+  padding-top: 75px;
+  padding-bottom: 75px;
+  position: relative;
+  margin: 100px;
+  border-radius: 10px;
+  background-color: #42c8f4;
+  height: 400px;
+  opacity: 80%;
+}
+
+.conversion-buttons {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  margin: 5px;
+}

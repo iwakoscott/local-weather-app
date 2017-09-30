@@ -37,35 +37,28 @@ var WeatherAppViewModel = function(){
 
   self.setLocation = function(){
 
-      $.getJSON("http://freegeoip.net/json/", function(json){
-        var lat = json.latitude;
-        var lon = json.longitude;
-        var location = json.city + ", " + json.region_code;
+        var locationURL = "https://geoip-db.com/json/";
+        var darkSkysURL = "https://api.darksky.net/forecast/3d3f1ae8241057a29c232b44187a2cc0/";
 
-        var weatherURL = 'https://fcc-weather-api.glitch.me/api/current?lat='+ lat + '&lon=' + lon;
-        var googlemapsURL = 'https://maps.googleapis.com/maps/api/geocode/json?latlng='+ lat + ',' + lon + '&key=AIzaSyC_tqhlcDMQL9QVYgj1DAa-WdDDEo8ZweQ';
-
-
-        self.weatherIcon('<i class="fa fa-cog" aria-hidden="true"></i>');
-        $('.weather-icon').rotate({animateTo: 1400, duration: 4000});
-
-          window.setTimeout(function(){
-
-            // FCC weather API
-            $.getJSON(weatherURL, function(json){
-              console.log(json.weather);
-              self.temperature(Math.round(json.main.temp));
-              self.isFahrenheit(false);
-              self.setWeatherIcon(json.weather[0].main);
-              self.location(location);
-            });
-
-        }, 2000);
+        $.getJSON(locationURL, function(json){
+          var long = json.longitude;
+          var lat = json.latitude;
+          var position = lat + ',' + long;
+          var location = json.city + ", " + json.state;
+          $.ajax({
+            url: darkSkysURL + position,
+            dataType: "jsonp",
+            success: function(json){
+                self.location(location);
+                self.conditions(json.currently.summary);
+                self.temperature(Math.round(json.currently.temperature));
+                self.isFahrenheit(true);
+                self.setWeatherIcon(json.currently.summary);
+            }
+          });
+        });
 
         $('.conversion-buttons').fadeIn("slow");
-
-
-      });
   }
 
   self.setWeatherIcon = function(weatherType){

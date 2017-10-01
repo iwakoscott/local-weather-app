@@ -38,7 +38,7 @@ var WeatherAppViewModel = function(){
   self.setLocation = function(){
 
         self.setWeatherIcon('gear');
-        $('.weather-icon').rotate({animateTo: 1400, duration: 3000});
+        $('.weather-icon').rotate({animateTo: 1400, duration: 3000, center: ["50%", "48%"]});
 
         window.setTimeout(function(){
           var locationURL = "https://geoip-db.com/json/";

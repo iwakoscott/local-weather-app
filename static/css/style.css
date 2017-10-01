@@ -2,8 +2,9 @@
   font-family: 'Archivo', sans-serif;
 }
 
-.fa-cloud {
-  color: white;
+.fa {
+  margin: 0;
+  padding: 0;
 }
 
 .weather-icon {
@@ -23,14 +24,15 @@
 
 .weather-box{
   border-style: solid;
-  padding-top: 50px;
-  padding-bottom: 50px;
+  padding-top: 100px;
+  padding-bottom: 100px;
   position: relative;
   margin: 100px;
   border-radius: 10px;
   background-color: #42c8f4;
-  height: 440px;
+  height: 525px;
   width: 100%;
+  overflow: hidden;
 }
 
 .conversion-buttons {

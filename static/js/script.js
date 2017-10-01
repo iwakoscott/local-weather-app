@@ -5,7 +5,7 @@ var WeatherAppViewModel = function(){
   self.location = ko.observable('');
   self.isFahrenheit = ko.observable(false);
   self.temperature = ko.observable('');
-  self.weatherIcon = ko.observable('');
+  self.weatherIcon = ko.observable('<i class="fa fa-cloud" aria-hidden="true"></i>');
   self.conditions = ko.observable("");
 
   self.formatTemperature = ko.computed(function(){
@@ -38,7 +38,7 @@ var WeatherAppViewModel = function(){
   self.setLocation = function(){
 
         self.setWeatherIcon('gear');
-        $('.weather-icon').rotate({animateTo: 1400, duration: 2000});
+        $('.weather-icon').rotate({animateTo: 1400, duration: 3000});
 
         window.setTimeout(function(){
           var locationURL = "https://geoip-db.com/json/";
@@ -63,7 +63,7 @@ var WeatherAppViewModel = function(){
           });
 
           $('.conversion-buttons').fadeIn("slow");
-        }, 2100);
+        }, 3000);
   }
 
   self.setWeatherIcon = function(weatherType){
@@ -102,5 +102,5 @@ $(document).ready(function(){
 
   window.setTimeout(function(){
     ko.applyBindings(new WeatherAppViewModel());
-  }, 4000);
+  }, 1000);
 });

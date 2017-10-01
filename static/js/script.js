@@ -37,28 +37,33 @@ var WeatherAppViewModel = function(){
 
   self.setLocation = function(){
 
-        var locationURL = "https://geoip-db.com/json/";
-        var darkSkysURL = "https://api.darksky.net/forecast/3d3f1ae8241057a29c232b44187a2cc0/";
+        self.setWeatherIcon('gear');
+        $('.weather-icon').rotate({animateTo: 1400, duration: 2000});
 
-        $.getJSON(locationURL, function(json){
-          var long = json.longitude;
-          var lat = json.latitude;
-          var position = lat + ',' + long;
-          var location = json.city + ", " + json.state;
-          $.ajax({
-            url: darkSkysURL + position,
-            dataType: "jsonp",
-            success: function(json){
-                self.location(location);
-                self.conditions(json.currently.summary);
-                self.temperature(Math.round(json.currently.temperature));
-                self.isFahrenheit(true);
-                self.setWeatherIcon(json.currently.summary);
-            }
+        window.setTimeout(function(){
+          var locationURL = "https://geoip-db.com/json/";
+          var darkSkysURL = "https://api.darksky.net/forecast/3d3f1ae8241057a29c232b44187a2cc0/";
+
+          $.getJSON(locationURL, function(json){
+            var long = json.longitude;
+            var lat = json.latitude;
+            var position = lat + ',' + long;
+            var location = json.city + ", " + json.state;
+            $.ajax({
+              url: darkSkysURL + position,
+              dataType: "jsonp",
+              success: function(json){
+                  self.location(location);
+                  self.conditions(json.currently.summary);
+                  self.temperature(Math.round(json.currently.temperature));
+                  self.isFahrenheit(true);
+                  self.setWeatherIcon(json.currently.summary);
+              }
+            });
           });
-        });
 
-        $('.conversion-buttons').fadeIn("slow");
+          $('.conversion-buttons').fadeIn("slow");
+        }, 2100);
   }
 
   self.setWeatherIcon = function(weatherType){
@@ -72,7 +77,8 @@ var WeatherAppViewModel = function(){
       "night": '<i class="fa fa-moon-o" aria-hidden="true"></i>',
       "clear": '<i class="fa fa-circle-thin" aria-hidden="true"></i>',
       "fog": '<i class="fa fa-low-vision" aria-hidden="true"></i>',
-      "mist": '<i class="fa fa-th" aria-hidden="true"></i>'
+      "mist": '<i class="fa fa-th" aria-hidden="true"></i>',
+      "gear": '<i class="fa fa-cog" aria-hidden="true"></i>'
     };
 
     for (key in icons){
@@ -96,5 +102,5 @@ $(document).ready(function(){
 
   window.setTimeout(function(){
     ko.applyBindings(new WeatherAppViewModel());
-  }, 2000);
+  }, 4000);
 });

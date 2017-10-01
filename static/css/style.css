@@ -23,14 +23,14 @@
 
 .weather-box{
   border-style: solid;
-  padding-top: 75px;
-  padding-bottom: 75px;
+  padding-top: 50px;
+  padding-bottom: 50px;
   position: relative;
   margin: 100px;
   border-radius: 10px;
   background-color: #42c8f4;
-  height: 400px;
-  opacity: 80%;
+  height: 425px;
+  width: 100%;
 }
 
 .conversion-buttons {
